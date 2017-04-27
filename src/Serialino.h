@@ -15,8 +15,7 @@
 
 #include <thread>
 #include <mutex>
-
-using namespace std;
+#include <string>
 
 enum state_t{
   reading,
@@ -43,21 +42,21 @@ class Serialino
         void (*reader_cbk)(const char* buffer, size_t chars_read));
 
     //writing a series of chars
-    void writeBuffer(const string &buffer);
+    void writeBuffer(const std::string &buffer);
 
   private:
-    string device_name;
+    std::string device_name;
 
     //serial_buffer
     char circular_buffer[CIRCULAR_SERIAL_BUFFER_SIZE];
 
     //members
-    string input;
+    std::string input;
 
     void (*reader_callback)(const char* buffer, size_t chars_read);
 
     state_t serial_state;
-    mutex mtx_serial_state;
+    std::mutex mtx_serial_state;
 
     //thread functions
     void serial_in();
