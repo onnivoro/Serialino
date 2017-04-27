@@ -11,9 +11,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include <cstring>
+#include <string>
 
 #include "Serialino.h"
+
+using namespace std;
 
 Serialino::Serialino(const char* serial_device)
 {
@@ -25,7 +27,6 @@ Serialino::Serialino(const char* serial_device)
 
 void Serialino::serial_in()
 {
-
   cout << "Opening device: " << device_name << endl;
   /* Open the file descriptor in non-blocking mode */
   int fd = open(device_name.c_str(), O_RDWR | O_NOCTTY);
@@ -89,7 +90,6 @@ void Serialino::serial_in()
     // Wait for input to become ready or until the time out; the first parameter is
     //  more than the largest file descriptor in any of the sets
     int select_status = select(fd + 1, &read_fds, &write_fds, &except_fds, &timeout);
-    //cout << "aoh: "<< select_status <<endl;
 
     if(select_status < 0)
     {
