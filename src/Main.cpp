@@ -29,8 +29,11 @@ int main(int argc, const char * argv[])
   Serialino ardu_serial(argv[1]);
   ardu_serial.setReadingCallback(&test_read);
   ardu_serial.startConnection();
-  string buffer;
-  ardu_serial.writeBuffer(buffer);
+// 	uncomment and use the following two lines to send data to arduino
+//  string buffer;
+//  ardu_serial.writeBuffer(buffer);
+  string input;
+  getline(cin, input);
   ardu_serial.closeConnection();
   return 0;
 }
