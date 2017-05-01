@@ -7,7 +7,7 @@
 //
 
 #include "Serialino.h"
-#include <string.h>
+#include <string>
 #include <iostream>
 using namespace std;
 
@@ -15,13 +15,16 @@ void test_read(const char* buffer, size_t buffer_size)
 {
   string output;
   output.append(buffer,buffer_size);
-  cout << output;
+  cout << output << endl;
 }
 
 int main(int argc, const char * argv[])
 {
   if(argc < 2)
-    return -1;
+  {
+	  cout << "bad usage, try: serialinoTest serial_port" << endl;
+	  return -1;
+  }
     
   Serialino ardu_serial(argv[1]);
   ardu_serial.setReadingCallback(&test_read);
